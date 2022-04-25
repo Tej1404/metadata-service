@@ -24,7 +24,6 @@ pipeline {
         stage('Push') {
             steps {
                 sh '''
-                    docker images
                     echo "pushing docker image ......."
                     docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
                     docker tag "${DOCKER_IMAGE_NAME}" "${DOCKER_IMAGE_NAME}":"$BUILD_NUMBER"
@@ -39,7 +38,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                    docker images
                     echo "deploying the application ........"
                     docker rm -f metadata-service || true
                     docker run -d -p 80:8080 --name metadata-service "${DOCKER_IMAGE_NAME}":latest
