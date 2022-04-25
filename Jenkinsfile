@@ -39,6 +39,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
+                    docker images
                     echo "deploying the application ........"
                     docker rm -f metadata-service || true
                     docker run -d -p 80:8080 --name metadata-service "${DOCKER_IMAGE_NAME}":latest
