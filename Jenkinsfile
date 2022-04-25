@@ -24,6 +24,7 @@ pipeline {
         stage('Push') {
             steps {
                 sh '''
+                    docker images
                     echo "pushing docker image ......."
                     docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
                     docker tag "${DOCKER_IMAGE_NAME}" "${DOCKER_IMAGE_NAME}":"$BUILD_NUMBER"
